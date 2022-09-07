@@ -17,10 +17,11 @@
 }
 
 .card {
+    --padding: 1rem;
     background-color: white;
-    padding: 1rem;
     border: 1px solid #777;
     border-radius: .25rem;
+    overflow: hidden;
 }
 
 .card.card-shadow {
@@ -28,8 +29,14 @@
     box-shadow: 0 2px 5px 0 rgba( 0,0,0,.2)
 }
 
+
+/* 
+    Specify padding-bottom to remove it
+*/
 .card-header {
     font-size: 1.5rem;
+    padding: var( --padding);
+    padding-bottom: 0;
     margin-bottom: .5rem;
 }
 
@@ -38,7 +45,13 @@
     Overflow - hinders that the image
     gets bigger than its container
 */
+
+/* 
+    If it's a Text header - get padding
+    if an Img header - no padding
+*/
 .card-header.card-image {
+    padding: 0;
     overflow: hidden;
 }
 
@@ -58,6 +71,11 @@
     Limit the max height of the img
     if user zooms in, img stays max 200px
 */
+
+/* 
+    transition = controls how fast zoom in & out will work
+    applies only to the Transform property in the bracket down below
+*/
 .card-header.card-image > img {
     display: block;
     width: 100%;
@@ -65,15 +83,34 @@
     aspect-ratio: 16/9;
     object-fit: cover;
     object-position: center;
+    transition: 200ms transform ease-in-out;
+}
+
+/* 
+    Add the zoom effect 
+    only on the Image
+*/
+
+.card:hover > .card-header.card-image > img {
+    transform: scale(1.025);
 }
 
 
+
+/* 
+    padding applies only to text
+    on the top 0
+    on the sides = --padding
+*/
 .card-body {
     font-size: .9rem; 
+    padding: 0 var(--padding)
 }
 
 .card-footer {
     margin-top: 1rem;
+    padding: var( --padding);
+    padding-top: 0;
 }
 
 .btn {
